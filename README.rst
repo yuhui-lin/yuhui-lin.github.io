@@ -1,3 +1,4 @@
-This is my personal website~
-`click here to head to
-yuhui-lin.github.io<https://yuhui-lin.github.io/>`_.
+This is my personal website repository~
+
+click `here <https://yuhui-lin.github.io/>`_ to head to
+yuhui-lin.github.io.
