@@ -10,6 +10,7 @@ categories: blog
 tag: 
     - data serialization
     - data inter-changable methods
+comments: trueG
 ---
 
 # Overview
@@ -135,3 +136,6 @@ In particular, FlatBuffers focus is on mobile hardware (where memory size and me
 - [Data Serialization Comparison: JSON, YAML, BSON, MessagePack](https://www.sitepoint.com/data-serialization-comparison-json-yaml-bson-messagepack/)
 - [Protocol Buffer vs Thrift vs Avro](https://ganges.usc.edu/pgroupW/images/a/a9/Serializarion_Framework.pdf)
 - [Improving Facebook's performance on Android with FlatBuffers](https://code.facebook.com/posts/872547912839369/improving-facebook-s-performance-on-android-with-flatbuffers/)
+
+
+{% include disqus.html %}
