@@ -1,0 +1,3 @@
+[submodule "misc/IMDb_celebrities"]
+	path = misc/IMDb_celebrities
+	url = https://github.com/yuhui-lin/IMDb_celebrities.git
