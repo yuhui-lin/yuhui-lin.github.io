@@ -1,0 +1,1116 @@
+<!DOCTYPE html><html lang="en-us" >
+
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.3.0 for Hugo" />
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Yuhui Lin" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Introduction to multiple data serialization methods." />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://yuhui-lin.github.io/post/2017-08-01_data-serialization/" />
+
+  
+  
+  
+    <meta name="theme-color" content="#2962ff" />
+  
+
+  
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.85d97726424ec4c0909a2e4a0de45e9a.css" />
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hue500084c77aac037bf395ff3ad15202a_115779_32x32_fill_lanczos_center_3.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hue500084c77aac037bf395ff3ad15202a_115779_180x180_fill_lanczos_center_3.png" />
+
+  <link rel="canonical" href="https://yuhui-lin.github.io/post/2017-08-01_data-serialization/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary" />
+  
+    <meta property="twitter:site" content="@Yuhui Lin" />
+    <meta property="twitter:creator" content="@Yuhui Lin" />
+  
+  <meta property="og:site_name" content="Yuhui Lin&#39;s Website" />
+  <meta property="og:url" content="https://yuhui-lin.github.io/post/2017-08-01_data-serialization/" />
+  <meta property="og:title" content="Data Serialization - JSON, BSON, MessengePack, Protocol Buffer, Thrift, Avro, Cap’n Proto, FlatBuffers | Yuhui Lin&#39;s Website" />
+  <meta property="og:description" content="Introduction to multiple data serialization methods." /><meta property="og:image" content="https://yuhui-lin.github.io/media/icon_hue500084c77aac037bf395ff3ad15202a_115779_512x512_fill_lanczos_center_3.png" />
+    <meta property="twitter:image" content="https://yuhui-lin.github.io/media/icon_hue500084c77aac037bf395ff3ad15202a_115779_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2017-08-01T00:00:00&#43;00:00"
+      />
+    
+    <meta property="article:modified_time" content="2017-08-01T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yuhui-lin.github.io/post/2017-08-01_data-serialization/"
+  },
+  "headline": "Data Serialization - JSON, BSON, MessengePack, Protocol Buffer, Thrift, Avro, Cap’n Proto, FlatBuffers",
+  
+  "datePublished": "2017-08-01T00:00:00Z",
+  "dateModified": "2017-08-01T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Yuhui Lin"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Yuhui Lin",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yuhui-lin.github.io/media/icon_hue500084c77aac037bf395ff3ad15202a_115779_192x192_fill_lanczos_center_3.png"
+    }
+  },
+  "description": "Introduction to multiple data serialization methods."
+}
+</script>
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>Data Serialization - JSON, BSON, MessengePack, Protocol Buffer, Thrift, Avro, Cap’n Proto, FlatBuffers | Yuhui Lin&#39;s Website</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="542a62b67b00fd42166bbf7020e5a3ea" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.2da3b1fa37e894630bf6de39b1b694b3.js"></script>
+
+  
+
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
+
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about/"><span>About</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Data Serialization - JSON, BSON, MessengePack, Protocol Buffer, Thrift, Avro, Cap’n Proto, FlatBuffers</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  <span >
+      Yuhui Lin</span>
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Aug 1, 2017
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    6 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/blog/">blog</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <h1 id="overview">Overview</h1>
+<p>According to <a href="https://en.wikipedia.org/wiki/Serialization" target="_blank" rel="noopener">Wikipedia</a>, serialization is:</p>
+<blockquote>
+<p>Serialization is the process of translating data structures or object state into a format that can be stored (for example, in a file or memory buffer) or transmitted (for example, across a network connection link) and reconstructed later (possibly in a different computer environment).</p>
+</blockquote>
+<p>Serialization is a pervasive activity in a lot programs, and a common source of memory inefficiency, with lots of temporary data structures needed to parse and represent data, and inefficient allocation patterns and locality.</p>
+<p>There are several classic data serialization formats, such as JSON, XML, CVS/TVS, Python Pickle, et. Among them, JSON is the most popular format for data serialization, and it has the following features (from <a href="https://www.sitepoint.com/data-serialization-comparison-json-yaml-bson-messagepack/" target="_blank" rel="noopener">this post</a>):</p>
+<ul>
+<li>(Mostly) human readable code, similar to XML/CSV/TSV format.</li>
+<li>Very simple and straightforward specification.</li>
+<li>Widespread support: not only does every programming language or IDE come with JSON support, but also many web services APIs offer JSON as a means of data interchange.</li>
+</ul>
+<p>As people utilize more complex architecture, serialization must meets several requirements: flexibililty, ability to grow, latency and still stay simple. This is when the drawbacks of classic formats start to hurt:</p>
+<ul>
+<li>lack of strict protocol description</li>
+<li>you have to maintain both server and client side code</li>
+<li>the size of human-readable files are larger than binary files</li>
+<li>lack of backward/forward compatibility</li>
+</ul>
+<p><em>This article is going to introduce some wildly used binary data serialization formats:</em></p>
+<table>
+    <colgroup>
+        <col width="30%" />
+        <col width="70%" />
+        </colgroup>
+    <thead>
+        <tr class="header">
+        <th>Formats</th>
+        <th>Features</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td markdown="span">BSON, MessagePack</td>
+            <td markdown="span">
+            - Do not require 'Schema' or compiling<br>
+            - easy to use<br>
+            - Best drop-in replacements if JSON is already used<br>
+            - have simple to implement specifications<br>
+            - less space efficient
+            </td>
+        </tr>
+        <tr>
+            <td markdown="span">Protocol Buffer, Thrift</td>
+            <td markdown="span"> - mature and wilely used systems<br>
+            - best support for multiple languags and cross platform<br>
+            - accompanied by good RPC frameworks: gRPC/Thrift
+            </td>
+        </tr>
+        <tr>
+            <td markdown="span">Apache Avro</td>
+            <td markdown="span">
+            - associated with hadoop/spark ecosystem<br>
+            - no compile stage because schema is embedded in the header of messages<br>
+            - use JSON as IDL to describe message format<br>
+            </td>
+        </tr>
+        <tr>
+            <td markdown="span">Cap’n Proto, FlatBuffers</td>
+            <td markdown="span"> 
+            - evolutions of protobuf/thrift<br>
+            - require no encoding/decoding stage<br>
+            - suitable for mobile/game/VR applications<br>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h1 id="data-formats">Data Formats</h1>
+<h2 id="bsonhttpbsonspecorg"><a href="http://bsonspec.org/" target="_blank" rel="noopener">BSON</a></h2>
+<p>BSON, short for <em>Binary JSON</em>, is best known as the primary data rep­res­ent­a­tion for <a href="https://www.mongodb.com/" target="_blank" rel="noopener">Mon­goDB</a>. It is designed for fast in-memory manipulation and support in-place updating.</p>
+<h2 id="messagepackhttpmsgpackorgindexhtml"><a href="http://msgpack.org/index.html" target="_blank" rel="noopener">MessagePack</a></h2>
+<p>MessagePack (MsgPack) is effectively JSON, but with efficient binary encoding. Like JSON, there is no or schemas, which depending on your application can be either be a pro or a con. But, if you are already streaming JSON via an API or using it for storage, then MessagePack can be a drop-in replacement. With a simple specification, MessagePack is supported by over 50 programming languages and environments.</p>
+<p>MessagePack is originally designed for network communication while BSON is designed for storages. As MessagePack&rsquo;s format is less verbose than BSON, MessagePack has smaller encoded file than BSON. As a result, MsgPack is also an extremely good methods to send small messages on wire. Besides, MsgPack has RPC support, static type-checking APIs and streaming APIs.</p>
+<h2 id="protocol-bufferhttpsdevelopersgooglecomprotocol-buffers"><a href="https://developers.google.com/protocol-buffers/" target="_blank" rel="noopener">Protocol Buffer</a></h2>
+<p>Protocol Buffer (Protobuf) was originally designed by Google at around 2001, and the second version (proto2) has been open-sourced since 2008. As of today, Protobuf is not only the glue to all Google services, but also an battle tested, very stable, well trusted system.</p>
+<p>The typical <strong>steps of using Protobuf</strong> is like: When you run the protocol buffer compiler on a .proto, the compiler generates the code in your chosen language you&rsquo;ll need to work with the message types you&rsquo;ve described in the file, including getting and setting field values, serializing your messages to an output stream, and parsing your messages from an input stream.</p>
+<p>Protocol Buffers language version 3 (aka proto3) was released at Jul 2016, which is not compatible to previous version. Proto3 simplifies the protocol buffer language, both for ease of use and to make it available in a wider range of programming languages: our current release lets you generate protocol buffer code in Java, C++, Python, Java Lite, Ruby, JavaScript, Objective-C, and C#.</p>
+<h2 id="apache-thrifthttpsthriftapacheorg"><a href="https://thrift.apache.org/" target="_blank" rel="noopener">Apache Thrift</a></h2>
+<p>Apache Thrift was first designed internally by Facebook and donated to Apache Foundation afterwards. It has a data serialization format similar to Protobuf, as well as a build-in RFC (remote procedure call) framework.</p>
+<p>Thrift is good at building services that work efficiently and seamlessly between C++, Java, Python, PHP, Ruby, Erlang, Perl, Haskell, C#, Cocoa, JavaScript, Node.js, Smalltalk, OCaml and Delphi and other languages.</p>
+<p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="https://image.slidesharecdn.com/pbvsthriftvsavro-120917080012-phpapp02/95/thrift-vs-protocol-buffers-vs-avro-biased-comparison-21-728.jpg?cb=1347868975" alt="image reference3" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h2 id="apache-avrohttpsavroapacheorg"><a href="https://avro.apache.org/" target="_blank" rel="noopener">Apache Avro</a></h2>
+<p>Apache Avro is a language-neutral data serialization system. The project was created by Doug Cutting (the creator of Hadoop) to address the major downside of Hadoop Writables: lack of language portability.</p>
+<p>Avro provides functionality similar to systems such as Thrift, Protocol Buffers, etc. Avro differs from these systems in the following fundamental aspects:</p>
+<ol>
+<li>Avro data is described using a language-independent schema. However, unlike in the other systems, code generation is optional in Avro, which means you can read and write data that conforms to a given schema even if your code has not seen that particular schema before. To achieve this, Avro assumes that the schema is always present at both read and write time. Avro schemas are defined with JSON . This facilitates implementation in languages that already have JSON libraries.</li>
+<li>Dynamic typing: Avro does not require that code be generated. Data is always accompanied by a schema that permits full processing of that data without code generation, static datatypes, etc. This facilitates construction of generic data-processing systems and languages.</li>
+<li>Untagged data: Since the schema is present when data is read, considerably less type information need be encoded with data, resulting in smaller serialization size.</li>
+<li>No manually-assigned field IDs: When a schema changes, both the old and new schema are always present when processing data, so differences may be resolved symbolically, using field names.</li>
+</ol>
+<p>Apache Avro supports languages like C, C++, C#, Go, Haskell, Java, Perl, PHP, Python, Ruby, Scala. What&rsquo;s more important, it works really well with Apache Hadoop/Spark ecosystem.</p>
+<h2 id="capn-protohttpscapnprotoorgindexhtml"><a href="https://capnproto.org/index.html" target="_blank" rel="noopener">Cap’n Proto</a></h2>
+<p>Cap’n Proto is an fast data interchange format and capability-based RPC system. The main selling point of Cap’n Proto is that there is no encoding/decoding step. In other words, Cap’n Proto has the ability to read data without first unpacking it. It is primarily created at around 2014 by Kenton Varda, who was the primary author of Protocol Buffers version 2, which is the version that Google released open source.</p>
+<h2 id="flatbuffershttpgooglegithubioflatbuffersindexhtml"><a href="http://google.github.io/flatbuffers/index.html" target="_blank" rel="noopener">FlatBuffers</a></h2>
+<p>FlatBuffers is an open source project from Google created mainly by Wouter van Oortmerssen. It is an evolution of protocol buffers that includes object metadata. FlatBuffers follows similar design principles to Cap’n Proto, which is that data should be structured the same way in-memory and on the wire, thus avoiding costly encode/decode steps.</p>
+<p>No matter how similar they are, there is one scenario where flatbuffers handles better than Cap’n Proto: FlatBuffers, like Protobuf, has the ability to leave out arbitrary fields from a table (better yet, it will automatically leave them out if they happen to have the default value). as data evolves, cases where lots of field get added/removed, or where a lot of fields are essentially empty are extremely common, making this a vital feature for efficiency, and for allowing people to add fields without instantly bloating things.</p>
+<p>In particular, FlatBuffers focus is on mobile hardware (where memory size and memory bandwidth is even more constrained than on desktop hardware), and applications that have the highest performance needs: games. Facebook has this awesome <a href="https://code.facebook.com/posts/872547912839369/improving-facebook-s-performance-on-android-with-flatbuffers/" target="_blank" rel="noopener">post</a> about how they improved Facebook&rsquo;s performance on Android with FlatBuffers.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://www.igvita.com/2011/08/01/protocol-buffers-avro-thrift-messagepack/" target="_blank" rel="noopener">https://www.igvita.com/2011/08/01/protocol-buffers-avro-thrift-messagepack/</a></li>
+<li><a href="https://www.sitepoint.com/data-serialization-comparison-json-yaml-bson-messagepack/" target="_blank" rel="noopener">Data Serialization Comparison: JSON, YAML, BSON, MessagePack</a></li>
+<li><a href="https://ganges.usc.edu/pgroupW/images/a/a9/Serializarion_Framework.pdf" target="_blank" rel="noopener">Protocol Buffer vs Thrift vs Avro</a></li>
+<li><a href="https://code.facebook.com/posts/872547912839369/improving-facebook-s-performance-on-android-with-flatbuffers/" target="_blank" rel="noopener">Improving Facebook&rsquo;s performance on Android with FlatBuffers</a></li>
+</ul>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/serialization/">serialization</a>
+  
+</div>
+
+
+
+<div class="share-box">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://yuhui-lin.github.io/post/2017-08-01_data-serialization/&amp;text=Data%20Serialization%20-%20JSON,%20BSON,%20MessengePack,%20Protocol%20Buffer,%20Thrift,%20Avro,%20Cap%e2%80%99n%20Proto,%20FlatBuffers" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://yuhui-lin.github.io/post/2017-08-01_data-serialization/&amp;t=Data%20Serialization%20-%20JSON,%20BSON,%20MessengePack,%20Protocol%20Buffer,%20Thrift,%20Avro,%20Cap%e2%80%99n%20Proto,%20FlatBuffers" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Data%20Serialization%20-%20JSON,%20BSON,%20MessengePack,%20Protocol%20Buffer,%20Thrift,%20Avro,%20Cap%e2%80%99n%20Proto,%20FlatBuffers&amp;body=https://yuhui-lin.github.io/post/2017-08-01_data-serialization/" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://yuhui-lin.github.io/post/2017-08-01_data-serialization/&amp;title=Data%20Serialization%20-%20JSON,%20BSON,%20MessengePack,%20Protocol%20Buffer,%20Thrift,%20Avro,%20Cap%e2%80%99n%20Proto,%20FlatBuffers" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=Data%20Serialization%20-%20JSON,%20BSON,%20MessengePack,%20Protocol%20Buffer,%20Thrift,%20Avro,%20Cap%e2%80%99n%20Proto,%20FlatBuffers%20https://yuhui-lin.github.io/post/2017-08-01_data-serialization/" target="_blank" rel="noopener" class="share-btn-whatsapp" aria-label="whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://yuhui-lin.github.io/post/2017-08-01_data-serialization/&amp;title=Data%20Serialization%20-%20JSON,%20BSON,%20MessengePack,%20Protocol%20Buffer,%20Thrift,%20Avro,%20Cap%e2%80%99n%20Proto,%20FlatBuffers" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://yuhui-lin.github.io/"><img class="avatar mr-3 avatar-circle" src="/author/yuhui-lin/avatar_hu9377a5430f74a25b26d770b7ba7107eb_45158_270x270_fill_q75_lanczos_center.jpg" alt="Yuhui Lin"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://yuhui-lin.github.io/">Yuhui Lin</a></h5>
+      <h6 class="card-subtitle">Software Engineer</h6>
+      
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/about/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/yuhui-lin" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+
+
+
+
+<script src="https://utteranc.es/client.js"
+        repo="yuhui-lin/yuhui-lin.github.io"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+
+<div class="article-widget">
+  
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/post/2017-09-10_imdb/" rel="next">Analyzing IMDb Top Celebrities Collaborative Relationship</a>
+  </div>
+  
+  
+</div>
+
+</div>
+
+
+
+
+
+  
+  
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+
+  
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+      
+      
+      
+      
+      
+      
+      Published with <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a> — the free, <a href="https://github.com/wowchemy/wowchemy-hugo-themes" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    <script src="/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js"></script>
+
+    
+    
+    
+      
+      
+
+      
+      
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/en/js/wowchemy.min.50d3bf3df0c53b31631bb48a62b35f92.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>

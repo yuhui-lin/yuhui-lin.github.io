@@ -1,0 +1,1084 @@
+<!DOCTYPE html><html lang="en-us" >
+
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.3.0 for Hugo" />
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Yuhui Lin" />
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Analyze relationship between tv/movie celebrities." />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://yuhui-lin.github.io/post/2017-09-10_imdb/" />
+
+  
+  
+  
+    <meta name="theme-color" content="#2962ff" />
+  
+
+  
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.f1ecf783c14edc00c9320c205831ad8e.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.85d97726424ec4c0909a2e4a0de45e9a.css" />
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/manifest.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hue500084c77aac037bf395ff3ad15202a_115779_32x32_fill_lanczos_center_3.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hue500084c77aac037bf395ff3ad15202a_115779_180x180_fill_lanczos_center_3.png" />
+
+  <link rel="canonical" href="https://yuhui-lin.github.io/post/2017-09-10_imdb/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+
+  
+  
+    
+    
+  
+  <meta property="twitter:card" content="summary_large_image" />
+  
+    <meta property="twitter:site" content="@Yuhui Lin" />
+    <meta property="twitter:creator" content="@Yuhui Lin" />
+  
+  <meta property="og:site_name" content="Yuhui Lin&#39;s Website" />
+  <meta property="og:url" content="https://yuhui-lin.github.io/post/2017-09-10_imdb/" />
+  <meta property="og:title" content="Analyzing IMDb Top Celebrities Collaborative Relationship | Yuhui Lin&#39;s Website" />
+  <meta property="og:description" content="Analyze relationship between tv/movie celebrities." /><meta property="og:image" content="https://yuhui-lin.github.io/post/2017-09-10_imdb/featured.png" />
+    <meta property="twitter:image" content="https://yuhui-lin.github.io/post/2017-09-10_imdb/featured.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2017-09-10T00:00:00&#43;00:00"
+      />
+    
+    <meta property="article:modified_time" content="2017-09-10T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://yuhui-lin.github.io/post/2017-09-10_imdb/"
+  },
+  "headline": "Analyzing IMDb Top Celebrities Collaborative Relationship",
+  
+  "image": [
+    "https://yuhui-lin.github.io/post/2017-09-10_imdb/featured.png"
+  ],
+  
+  "datePublished": "2017-09-10T00:00:00Z",
+  "dateModified": "2017-09-10T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Yuhui Lin"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Yuhui Lin",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://yuhui-lin.github.io/media/icon_hue500084c77aac037bf395ff3ad15202a_115779_192x192_fill_lanczos_center_3.png"
+    }
+  },
+  "description": "Analyze relationship between tv/movie celebrities."
+}
+</script>
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>Analyzing IMDb Top Celebrities Collaborative Relationship | Yuhui Lin&#39;s Website</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="1b3e79487ce5b6e6619e472522677446" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.2da3b1fa37e894630bf6de39b1b694b3.js"></script>
+
+  
+
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
+
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-end" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about/"><span>About</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Analyzing IMDb Top Celebrities Collaborative Relationship</h1>
+
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  <span >
+      Yuhui Lin</span>
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Sep 10, 2017
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    2 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/blog/">blog</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 536px;">
+  <div style="position: relative">
+    <img src="/post/2017-09-10_imdb/featured_hu705b76118573ec4f1286d7343a28de99_1248515_720x0_resize_lanczos_3.png" width="720" height="536" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>{% assign lvl = page.url | append:&lsquo;X&rsquo; | split:'/' | size %}
+{% capture relative %}{% for i in (3..lvl) %}../{% endfor %}{% endcapture %}</p>
+<style>
+svg {
+  display: block;
+  //margin: 0 auto; 
+  margin-left: -120px;
+}
+</style>
+<link href="{{ relative }}misc/IMDb_celebrities/d3.ts/styles.css" rel="stylesheet" />
+<h1 id="overview">Overview</h1>
+<p>As an international student in Canada, I found I am only familiar with a few number of TV show/movie stars. As a result, I decided to write a post concerning the relationship between tv/movie celebrities. Instead of focusing on the rumors or hearsay on gossip magzines, this post is more about working relationships and career achievements.</p>
+<p>I get the top 200 celebrities from <a href="http://www.imdb.com/search/name?gender=male,female" target="_blank" rel="noopener">IMDb Most Popular Females/Males</a> on Aug 2017. This ranking is based on IMDb STARmeter which does not mean the acting skills of the stars but the level of public interest in the person. The working relationships are extracted from <a href="http://www.imdb.com/interfaces" target="_blank" rel="noopener">IMDb Datasets</a> located in the AWS S3 bucket.</p>
+<p>All source code has been uploaded to <a href="https://github.com/yuhui-lin/IMDb_celebrities" target="_blank" rel="noopener">this github repository</a>.</p>
+<h1 id="strongly-connected-celebrities">Strongly connected celebrities</h1>
+<p>Working relationship can be easily demonstrated by graphs. In this post, I use D3.js and Typescript to draw interactively <a href="https://bl.ocks.org/mbostock/4062045" target="_blank" rel="noopener">Force-Directed Graph</a>. D3.js is a really cool visualization tool which can be hosted in github.io with Jekyll Blog. while learning Javascript, I found Typescript is rather interesting. It provides not only plenty of object-oriented syntactic sugars, but also static analysis which helps me learn D3.js faster.</p>
+<p>In the following graph, I tried to find strongly connected celebrities' groups by applying a classic community detection algorithm - <a href="https://perso.uclouvain.be/vincent.blondel/research/louvain.html" target="_blank" rel="noopener">Louvain Method</a>. This algorithm divides the top celebrities into groups such that each set of person is densely connected internally and sparsely connected between groups.</p>
+<p><strong>TV stars&rsquo;relationship network:</strong>
+<svg id='tv' width="1000" height="700"></svg>
+<em>(You can click-and-drag the nodes around. The name of celebrities should emerge when hovering over the circles. Different groups are distinguished by different color. The radius of circles stand for their number of connections.)</em></p>
+<p>For TV show stars, there are a few densely connected groups:</p>
+<p><strong>Game of Throne</strong>:</p>
+<ul>
+<li>Emilia Clarke</li>
+<li>Nikolaj Coster-Waldau</li>
+<li>Peter Dinklage</li>
+<li>Lena Headey</li>
+<li>Kit Harington</li>
+<li>Aidan Gillen</li>
+<li>Rose Leslie</li>
+<li>Sophie Turner</li>
+<li>Natalie Dormer</li>
+</ul>
+<p><strong>Vikings</strong>:</p>
+<ul>
+<li>Katheryn Winnick</li>
+<li>Travis Fimmel</li>
+</ul>
+<p><strong>Riverdale</strong>:</p>
+<ul>
+<li>Cole Sprouse</li>
+<li>Mädchen Amick</li>
+</ul>
+<p><strong>Big Little Lies</strong>:</p>
+<ul>
+<li>Shailene Woodley</li>
+<li>Reese Witherspoon</li>
+<li>Shailene Woodley</li>
+</ul>
+<p><strong>Guardians of the Galaxy</strong>:</p>
+<ul>
+<li>Chris Pratt</li>
+<li>Zoe Saldana</li>
+</ul>
+<p><strong>Movie stars&rsquo;relationship network:</strong>
+<svg id='movie' width="1000" height="700"></svg></p>
+<p>For movie stars, they are more likely to collaborate with varous of people.</p>
+<h1 id="centers-among-stars">Centers Among Stars</h1>
+<p>In this section, I am going to compare the &ldquo;degree&rdquo; of top celebrities.</p>
+<h1 id="reference">Reference</h1>
+<ul>
+<li>inspired by <a href="https://zhuanlan.zhihu.com/p/27369379" target="_blank" rel="noopener">别开枪，我不是狗仔——数据剖析明星关系</a></li>
+</ul>
+<script src="{{ relative }}misc/IMDb_celebrities/d3.ts/bundle.js"></script>
+<script>
+  bundle.draw('movie', 'movie', "{{ relative }}misc/IMDb_celebrities/output/graph_200.json");
+  bundle.draw('tv', 'tvEps', "{{ relative }}misc/IMDb_celebrities/output/graph_200.json");
+  <!-- bundle.draw('all', 'all', "{{ relative }}misc/IMDb_celebrities/output/graph_200.json"); -->
+</script>
+
+    </div>
+
+    
+
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/imdb-database/">IMDb Database</a>
+  
+  <a class="badge badge-light" href="/tag/data-analysis/">data analysis</a>
+  
+  <a class="badge badge-light" href="/tag/d3.js/">d3.js</a>
+  
+  <a class="badge badge-light" href="/tag/typescript/">typescript</a>
+  
+</div>
+
+
+
+<div class="share-box">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://yuhui-lin.github.io/post/2017-09-10_imdb/&amp;text=Analyzing%20IMDb%20Top%20Celebrities%20Collaborative%20Relationship" target="_blank" rel="noopener" class="share-btn-twitter" aria-label="twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://yuhui-lin.github.io/post/2017-09-10_imdb/&amp;t=Analyzing%20IMDb%20Top%20Celebrities%20Collaborative%20Relationship" target="_blank" rel="noopener" class="share-btn-facebook" aria-label="facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Analyzing%20IMDb%20Top%20Celebrities%20Collaborative%20Relationship&amp;body=https://yuhui-lin.github.io/post/2017-09-10_imdb/" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://yuhui-lin.github.io/post/2017-09-10_imdb/&amp;title=Analyzing%20IMDb%20Top%20Celebrities%20Collaborative%20Relationship" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=Analyzing%20IMDb%20Top%20Celebrities%20Collaborative%20Relationship%20https://yuhui-lin.github.io/post/2017-09-10_imdb/" target="_blank" rel="noopener" class="share-btn-whatsapp" aria-label="whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://yuhui-lin.github.io/post/2017-09-10_imdb/&amp;title=Analyzing%20IMDb%20Top%20Celebrities%20Collaborative%20Relationship" target="_blank" rel="noopener" class="share-btn-weibo" aria-label="weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://yuhui-lin.github.io/"><img class="avatar mr-3 avatar-circle" src="/author/yuhui-lin/avatar_hu9377a5430f74a25b26d770b7ba7107eb_45158_270x270_fill_q75_lanczos_center.jpg" alt="Yuhui Lin"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://yuhui-lin.github.io/">Yuhui Lin</a></h5>
+      <h6 class="card-subtitle">Software Engineer</h6>
+      
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/about/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/yuhui-lin" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+
+
+
+
+<script src="https://utteranc.es/client.js"
+        repo="yuhui-lin/yuhui-lin.github.io"
+        issue-term="pathname"
+        theme="github-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+
+<div class="article-widget">
+  
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/post/2017-08-01_data-serialization/" rel="prev">Data Serialization - JSON, BSON, MessengePack, Protocol Buffer, Thrift, Avro, Cap’n Proto, FlatBuffers</a>
+  </div>
+  
+</div>
+
+</div>
+
+
+
+
+
+  
+  
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+
+  
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+      
+      
+      
+      
+      
+      
+      Published with <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a> — the free, <a href="https://github.com/wowchemy/wowchemy-hugo-themes" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    <script src="/js/vendor-bundle.min.b73dfaac3b6499dc997741748a7c3fe2.js"></script>
+
+    
+    
+    
+      
+      
+
+      
+      
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js" crossorigin="anonymous"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/en/js/wowchemy.min.50d3bf3df0c53b31631bb48a62b35f92.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>

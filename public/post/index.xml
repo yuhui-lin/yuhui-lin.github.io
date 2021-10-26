@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts | Yuhui Lin&#39;s Website</title>
+    <link>https://yuhui-lin.github.io/post/</link>
+      <atom:link href="https://yuhui-lin.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <description>Posts</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 10 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://yuhui-lin.github.io/media/icon_hue500084c77aac037bf395ff3ad15202a_115779_512x512_fill_lanczos_center_3.png</url>
+      <title>Posts</title>
+      <link>https://yuhui-lin.github.io/post/</link>
+    </image>
+    
+    <item>
+      <title>Analyzing IMDb Top Celebrities Collaborative Relationship</title>
+      <link>https://yuhui-lin.github.io/post/2017-09-10_imdb/</link>
+      <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
+      <guid>https://yuhui-lin.github.io/post/2017-09-10_imdb/</guid>
+      <description>&lt;p&gt;{% assign lvl = page.url | append:&amp;lsquo;X&amp;rsquo; | split:&#39;/&#39; | size %}
+{% capture relative %}{% for i in (3..lvl) %}../{% endfor %}{% endcapture %}&lt;/p&gt;
+&lt;style&gt;
+svg {
+  display: block;
+  //margin: 0 auto; 
+  margin-left: -120px;
+}
+&lt;/style&gt;
+&lt;link href=&#34;{{ relative }}misc/IMDb_celebrities/d3.ts/styles.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;
+&lt;p&gt;As an international student in Canada, I found I am only familiar with a few number of TV show/movie stars. As a result, I decided to write a post concerning the relationship between tv/movie celebrities. Instead of focusing on the rumors or hearsay on gossip magzines, this post is more about working relationships and career achievements.&lt;/p&gt;
+&lt;p&gt;I get the top 200 celebrities from &lt;a href=&#34;http://www.imdb.com/search/name?gender=male,female&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;IMDb Most Popular Females/Males&lt;/a&gt; on Aug 2017. This ranking is based on IMDb STARmeter which does not mean the acting skills of the stars but the level of public interest in the person. The working relationships are extracted from &lt;a href=&#34;http://www.imdb.com/interfaces&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;IMDb Datasets&lt;/a&gt; located in the AWS S3 bucket.&lt;/p&gt;
+&lt;p&gt;All source code has been uploaded to &lt;a href=&#34;https://github.com/yuhui-lin/IMDb_celebrities&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this github repository&lt;/a&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;strongly-connected-celebrities&#34;&gt;Strongly connected celebrities&lt;/h1&gt;
+&lt;p&gt;Working relationship can be easily demonstrated by graphs. In this post, I use D3.js and Typescript to draw interactively &lt;a href=&#34;https://bl.ocks.org/mbostock/4062045&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Force-Directed Graph&lt;/a&gt;. D3.js is a really cool visualization tool which can be hosted in github.io with Jekyll Blog. while learning Javascript, I found Typescript is rather interesting. It provides not only plenty of object-oriented syntactic sugars, but also static analysis which helps me learn D3.js faster.&lt;/p&gt;
+&lt;p&gt;In the following graph, I tried to find strongly connected celebrities&#39; groups by applying a classic community detection algorithm - &lt;a href=&#34;https://perso.uclouvain.be/vincent.blondel/research/louvain.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Louvain Method&lt;/a&gt;. This algorithm divides the top celebrities into groups such that each set of person is densely connected internally and sparsely connected between groups.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;TV stars&amp;rsquo;relationship network:&lt;/strong&gt;
+&lt;svg id=&#39;tv&#39; width=&#34;1000&#34; height=&#34;700&#34;&gt;&lt;/svg&gt;
+&lt;em&gt;(You can click-and-drag the nodes around. The name of celebrities should emerge when hovering over the circles. Different groups are distinguished by different color. The radius of circles stand for their number of connections.)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;For TV show stars, there are a few densely connected groups:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Game of Throne&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Emilia Clarke&lt;/li&gt;
+&lt;li&gt;Nikolaj Coster-Waldau&lt;/li&gt;
+&lt;li&gt;Peter Dinklage&lt;/li&gt;
+&lt;li&gt;Lena Headey&lt;/li&gt;
+&lt;li&gt;Kit Harington&lt;/li&gt;
+&lt;li&gt;Aidan Gillen&lt;/li&gt;
+&lt;li&gt;Rose Leslie&lt;/li&gt;
+&lt;li&gt;Sophie Turner&lt;/li&gt;
+&lt;li&gt;Natalie Dormer&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Vikings&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Katheryn Winnick&lt;/li&gt;
+&lt;li&gt;Travis Fimmel&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Riverdale&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cole Sprouse&lt;/li&gt;
+&lt;li&gt;Mädchen Amick&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Big Little Lies&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Shailene Woodley&lt;/li&gt;
+&lt;li&gt;Reese Witherspoon&lt;/li&gt;
+&lt;li&gt;Shailene Woodley&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Guardians of the Galaxy&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Chris Pratt&lt;/li&gt;
+&lt;li&gt;Zoe Saldana&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Movie stars&amp;rsquo;relationship network:&lt;/strong&gt;
+&lt;svg id=&#39;movie&#39; width=&#34;1000&#34; height=&#34;700&#34;&gt;&lt;/svg&gt;&lt;/p&gt;
+&lt;p&gt;For movie stars, they are more likely to collaborate with varous of people.&lt;/p&gt;
+&lt;h1 id=&#34;centers-among-stars&#34;&gt;Centers Among Stars&lt;/h1&gt;
+&lt;p&gt;In this section, I am going to compare the &amp;ldquo;degree&amp;rdquo; of top celebrities.&lt;/p&gt;
+&lt;h1 id=&#34;reference&#34;&gt;Reference&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;inspired by &lt;a href=&#34;https://zhuanlan.zhihu.com/p/27369379&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;别开枪，我不是狗仔——数据剖析明星关系&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;script src=&#34;{{ relative }}misc/IMDb_celebrities/d3.ts/bundle.js&#34;&gt;&lt;/script&gt;
+&lt;script&gt;
+  bundle.draw(&#39;movie&#39;, &#39;movie&#39;, &#34;{{ relative }}misc/IMDb_celebrities/output/graph_200.json&#34;);
+  bundle.draw(&#39;tv&#39;, &#39;tvEps&#39;, &#34;{{ relative }}misc/IMDb_celebrities/output/graph_200.json&#34;);
+  &lt;!-- bundle.draw(&#39;all&#39;, &#39;all&#39;, &#34;{{ relative }}misc/IMDb_celebrities/output/graph_200.json&#34;); --&gt;
+&lt;/script&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Data Serialization - JSON, BSON, MessengePack, Protocol Buffer, Thrift, Avro, Cap’n Proto, FlatBuffers</title>
+      <link>https://yuhui-lin.github.io/post/2017-08-01_data-serialization/</link>
+      <pubDate>Tue, 01 Aug 2017 00:00:00 +0000</pubDate>
+      <guid>https://yuhui-lin.github.io/post/2017-08-01_data-serialization/</guid>
+      <description>&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;
+&lt;p&gt;According to &lt;a href=&#34;https://en.wikipedia.org/wiki/Serialization&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Wikipedia&lt;/a&gt;, serialization is:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Serialization is the process of translating data structures or object state into a format that can be stored (for example, in a file or memory buffer) or transmitted (for example, across a network connection link) and reconstructed later (possibly in a different computer environment).&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Serialization is a pervasive activity in a lot programs, and a common source of memory inefficiency, with lots of temporary data structures needed to parse and represent data, and inefficient allocation patterns and locality.&lt;/p&gt;
+&lt;p&gt;There are several classic data serialization formats, such as JSON, XML, CVS/TVS, Python Pickle, et. Among them, JSON is the most popular format for data serialization, and it has the following features (from &lt;a href=&#34;https://www.sitepoint.com/data-serialization-comparison-json-yaml-bson-messagepack/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this post&lt;/a&gt;):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;(Mostly) human readable code, similar to XML/CSV/TSV format.&lt;/li&gt;
+&lt;li&gt;Very simple and straightforward specification.&lt;/li&gt;
+&lt;li&gt;Widespread support: not only does every programming language or IDE come with JSON support, but also many web services APIs offer JSON as a means of data interchange.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As people utilize more complex architecture, serialization must meets several requirements: flexibililty, ability to grow, latency and still stay simple. This is when the drawbacks of classic formats start to hurt:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;lack of strict protocol description&lt;/li&gt;
+&lt;li&gt;you have to maintain both server and client side code&lt;/li&gt;
+&lt;li&gt;the size of human-readable files are larger than binary files&lt;/li&gt;
+&lt;li&gt;lack of backward/forward compatibility&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;This article is going to introduce some wildly used binary data serialization formats:&lt;/em&gt;&lt;/p&gt;
+&lt;table&gt;
+    &lt;colgroup&gt;
+        &lt;col width=&#34;30%&#34; /&gt;
+        &lt;col width=&#34;70%&#34; /&gt;
+        &lt;/colgroup&gt;
+    &lt;thead&gt;
+        &lt;tr class=&#34;header&#34;&gt;
+        &lt;th&gt;Formats&lt;/th&gt;
+        &lt;th&gt;Features&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;td markdown=&#34;span&#34;&gt;BSON, MessagePack&lt;/td&gt;
+            &lt;td markdown=&#34;span&#34;&gt;
+            - Do not require &#39;Schema&#39; or compiling&lt;br&gt;
+            - easy to use&lt;br&gt;
+            - Best drop-in replacements if JSON is already used&lt;br&gt;
+            - have simple to implement specifications&lt;br&gt;
+            - less space efficient
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td markdown=&#34;span&#34;&gt;Protocol Buffer, Thrift&lt;/td&gt;
+            &lt;td markdown=&#34;span&#34;&gt; - mature and wilely used systems&lt;br&gt;
+            - best support for multiple languags and cross platform&lt;br&gt;
+            - accompanied by good RPC frameworks: gRPC/Thrift
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td markdown=&#34;span&#34;&gt;Apache Avro&lt;/td&gt;
+            &lt;td markdown=&#34;span&#34;&gt;
+            - associated with hadoop/spark ecosystem&lt;br&gt;
+            - no compile stage because schema is embedded in the header of messages&lt;br&gt;
+            - use JSON as IDL to describe message format&lt;br&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+            &lt;td markdown=&#34;span&#34;&gt;Cap’n Proto, FlatBuffers&lt;/td&gt;
+            &lt;td markdown=&#34;span&#34;&gt; 
+            - evolutions of protobuf/thrift&lt;br&gt;
+            - require no encoding/decoding stage&lt;br&gt;
+            - suitable for mobile/game/VR applications&lt;br&gt;
+            &lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h1 id=&#34;data-formats&#34;&gt;Data Formats&lt;/h1&gt;
+&lt;h2 id=&#34;bsonhttpbsonspecorg&#34;&gt;&lt;a href=&#34;http://bsonspec.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;BSON&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;BSON, short for &lt;em&gt;Binary JSON&lt;/em&gt;, is best known as the primary data rep­res­ent­a­tion for &lt;a href=&#34;https://www.mongodb.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Mon­goDB&lt;/a&gt;. It is designed for fast in-memory manipulation and support in-place updating.&lt;/p&gt;
+&lt;h2 id=&#34;messagepackhttpmsgpackorgindexhtml&#34;&gt;&lt;a href=&#34;http://msgpack.org/index.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;MessagePack&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;MessagePack (MsgPack) is effectively JSON, but with efficient binary encoding. Like JSON, there is no or schemas, which depending on your application can be either be a pro or a con. But, if you are already streaming JSON via an API or using it for storage, then MessagePack can be a drop-in replacement. With a simple specification, MessagePack is supported by over 50 programming languages and environments.&lt;/p&gt;
+&lt;p&gt;MessagePack is originally designed for network communication while BSON is designed for storages. As MessagePack&amp;rsquo;s format is less verbose than BSON, MessagePack has smaller encoded file than BSON. As a result, MsgPack is also an extremely good methods to send small messages on wire. Besides, MsgPack has RPC support, static type-checking APIs and streaming APIs.&lt;/p&gt;
+&lt;h2 id=&#34;protocol-bufferhttpsdevelopersgooglecomprotocol-buffers&#34;&gt;&lt;a href=&#34;https://developers.google.com/protocol-buffers/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Protocol Buffer&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Protocol Buffer (Protobuf) was originally designed by Google at around 2001, and the second version (proto2) has been open-sourced since 2008. As of today, Protobuf is not only the glue to all Google services, but also an battle tested, very stable, well trusted system.&lt;/p&gt;
+&lt;p&gt;The typical &lt;strong&gt;steps of using Protobuf&lt;/strong&gt; is like: When you run the protocol buffer compiler on a .proto, the compiler generates the code in your chosen language you&amp;rsquo;ll need to work with the message types you&amp;rsquo;ve described in the file, including getting and setting field values, serializing your messages to an output stream, and parsing your messages from an input stream.&lt;/p&gt;
+&lt;p&gt;Protocol Buffers language version 3 (aka proto3) was released at Jul 2016, which is not compatible to previous version. Proto3 simplifies the protocol buffer language, both for ease of use and to make it available in a wider range of programming languages: our current release lets you generate protocol buffer code in Java, C++, Python, Java Lite, Ruby, JavaScript, Objective-C, and C#.&lt;/p&gt;
+&lt;h2 id=&#34;apache-thrifthttpsthriftapacheorg&#34;&gt;&lt;a href=&#34;https://thrift.apache.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Apache Thrift&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Apache Thrift was first designed internally by Facebook and donated to Apache Foundation afterwards. It has a data serialization format similar to Protobuf, as well as a build-in RFC (remote procedure call) framework.&lt;/p&gt;
+&lt;p&gt;Thrift is good at building services that work efficiently and seamlessly between C++, Java, Python, PHP, Ruby, Erlang, Perl, Haskell, C#, Cocoa, JavaScript, Node.js, Smalltalk, OCaml and Delphi and other languages.&lt;/p&gt;
+&lt;p&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;https://image.slidesharecdn.com/pbvsthriftvsavro-120917080012-phpapp02/95/thrift-vs-protocol-buffers-vs-avro-biased-comparison-21-728.jpg?cb=1347868975&#34; alt=&#34;image reference3&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;h2 id=&#34;apache-avrohttpsavroapacheorg&#34;&gt;&lt;a href=&#34;https://avro.apache.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Apache Avro&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Apache Avro is a language-neutral data serialization system. The project was created by Doug Cutting (the creator of Hadoop) to address the major downside of Hadoop Writables: lack of language portability.&lt;/p&gt;
+&lt;p&gt;Avro provides functionality similar to systems such as Thrift, Protocol Buffers, etc. Avro differs from these systems in the following fundamental aspects:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Avro data is described using a language-independent schema. However, unlike in the other systems, code generation is optional in Avro, which means you can read and write data that conforms to a given schema even if your code has not seen that particular schema before. To achieve this, Avro assumes that the schema is always present at both read and write time. Avro schemas are defined with JSON . This facilitates implementation in languages that already have JSON libraries.&lt;/li&gt;
+&lt;li&gt;Dynamic typing: Avro does not require that code be generated. Data is always accompanied by a schema that permits full processing of that data without code generation, static datatypes, etc. This facilitates construction of generic data-processing systems and languages.&lt;/li&gt;
+&lt;li&gt;Untagged data: Since the schema is present when data is read, considerably less type information need be encoded with data, resulting in smaller serialization size.&lt;/li&gt;
+&lt;li&gt;No manually-assigned field IDs: When a schema changes, both the old and new schema are always present when processing data, so differences may be resolved symbolically, using field names.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Apache Avro supports languages like C, C++, C#, Go, Haskell, Java, Perl, PHP, Python, Ruby, Scala. What&amp;rsquo;s more important, it works really well with Apache Hadoop/Spark ecosystem.&lt;/p&gt;
+&lt;h2 id=&#34;capn-protohttpscapnprotoorgindexhtml&#34;&gt;&lt;a href=&#34;https://capnproto.org/index.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Cap’n Proto&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Cap’n Proto is an fast data interchange format and capability-based RPC system. The main selling point of Cap’n Proto is that there is no encoding/decoding step. In other words, Cap’n Proto has the ability to read data without first unpacking it. It is primarily created at around 2014 by Kenton Varda, who was the primary author of Protocol Buffers version 2, which is the version that Google released open source.&lt;/p&gt;
+&lt;h2 id=&#34;flatbuffershttpgooglegithubioflatbuffersindexhtml&#34;&gt;&lt;a href=&#34;http://google.github.io/flatbuffers/index.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;FlatBuffers&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;FlatBuffers is an open source project from Google created mainly by Wouter van Oortmerssen. It is an evolution of protocol buffers that includes object metadata. FlatBuffers follows similar design principles to Cap’n Proto, which is that data should be structured the same way in-memory and on the wire, thus avoiding costly encode/decode steps.&lt;/p&gt;
+&lt;p&gt;No matter how similar they are, there is one scenario where flatbuffers handles better than Cap’n Proto: FlatBuffers, like Protobuf, has the ability to leave out arbitrary fields from a table (better yet, it will automatically leave them out if they happen to have the default value). as data evolves, cases where lots of field get added/removed, or where a lot of fields are essentially empty are extremely common, making this a vital feature for efficiency, and for allowing people to add fields without instantly bloating things.&lt;/p&gt;
+&lt;p&gt;In particular, FlatBuffers focus is on mobile hardware (where memory size and memory bandwidth is even more constrained than on desktop hardware), and applications that have the highest performance needs: games. Facebook has this awesome &lt;a href=&#34;https://code.facebook.com/posts/872547912839369/improving-facebook-s-performance-on-android-with-flatbuffers/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;post&lt;/a&gt; about how they improved Facebook&amp;rsquo;s performance on Android with FlatBuffers.&lt;/p&gt;
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.igvita.com/2011/08/01/protocol-buffers-avro-thrift-messagepack/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://www.igvita.com/2011/08/01/protocol-buffers-avro-thrift-messagepack/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.sitepoint.com/data-serialization-comparison-json-yaml-bson-messagepack/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Data Serialization Comparison: JSON, YAML, BSON, MessagePack&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://ganges.usc.edu/pgroupW/images/a/a9/Serializarion_Framework.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Protocol Buffer vs Thrift vs Avro&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://code.facebook.com/posts/872547912839369/improving-facebook-s-performance-on-android-with-flatbuffers/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Improving Facebook&amp;rsquo;s performance on Android with FlatBuffers&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

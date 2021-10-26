@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>typescript | Yuhui Lin&#39;s Website</title>
+    <link>https://yuhui-lin.github.io/tag/typescript/</link>
+      <atom:link href="https://yuhui-lin.github.io/tag/typescript/index.xml" rel="self" type="application/rss+xml" />
+    <description>typescript</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 10 Sep 2017 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://yuhui-lin.github.io/media/icon_hue500084c77aac037bf395ff3ad15202a_115779_512x512_fill_lanczos_center_3.png</url>
+      <title>typescript</title>
+      <link>https://yuhui-lin.github.io/tag/typescript/</link>
+    </image>
+    
+    <item>
+      <title>Analyzing IMDb Top Celebrities Collaborative Relationship</title>
+      <link>https://yuhui-lin.github.io/post/2017-09-10_imdb/</link>
+      <pubDate>Sun, 10 Sep 2017 00:00:00 +0000</pubDate>
+      <guid>https://yuhui-lin.github.io/post/2017-09-10_imdb/</guid>
+      <description>&lt;p&gt;{% assign lvl = page.url | append:&amp;lsquo;X&amp;rsquo; | split:&#39;/&#39; | size %}
+{% capture relative %}{% for i in (3..lvl) %}../{% endfor %}{% endcapture %}&lt;/p&gt;
+&lt;style&gt;
+svg {
+  display: block;
+  //margin: 0 auto; 
+  margin-left: -120px;
+}
+&lt;/style&gt;
+&lt;link href=&#34;{{ relative }}misc/IMDb_celebrities/d3.ts/styles.css&#34; rel=&#34;stylesheet&#34; /&gt;
+&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;
+&lt;p&gt;As an international student in Canada, I found I am only familiar with a few number of TV show/movie stars. As a result, I decided to write a post concerning the relationship between tv/movie celebrities. Instead of focusing on the rumors or hearsay on gossip magzines, this post is more about working relationships and career achievements.&lt;/p&gt;
+&lt;p&gt;I get the top 200 celebrities from &lt;a href=&#34;http://www.imdb.com/search/name?gender=male,female&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;IMDb Most Popular Females/Males&lt;/a&gt; on Aug 2017. This ranking is based on IMDb STARmeter which does not mean the acting skills of the stars but the level of public interest in the person. The working relationships are extracted from &lt;a href=&#34;http://www.imdb.com/interfaces&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;IMDb Datasets&lt;/a&gt; located in the AWS S3 bucket.&lt;/p&gt;
+&lt;p&gt;All source code has been uploaded to &lt;a href=&#34;https://github.com/yuhui-lin/IMDb_celebrities&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this github repository&lt;/a&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;strongly-connected-celebrities&#34;&gt;Strongly connected celebrities&lt;/h1&gt;
+&lt;p&gt;Working relationship can be easily demonstrated by graphs. In this post, I use D3.js and Typescript to draw interactively &lt;a href=&#34;https://bl.ocks.org/mbostock/4062045&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Force-Directed Graph&lt;/a&gt;. D3.js is a really cool visualization tool which can be hosted in github.io with Jekyll Blog. while learning Javascript, I found Typescript is rather interesting. It provides not only plenty of object-oriented syntactic sugars, but also static analysis which helps me learn D3.js faster.&lt;/p&gt;
+&lt;p&gt;In the following graph, I tried to find strongly connected celebrities&#39; groups by applying a classic community detection algorithm - &lt;a href=&#34;https://perso.uclouvain.be/vincent.blondel/research/louvain.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Louvain Method&lt;/a&gt;. This algorithm divides the top celebrities into groups such that each set of person is densely connected internally and sparsely connected between groups.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;TV stars&amp;rsquo;relationship network:&lt;/strong&gt;
+&lt;svg id=&#39;tv&#39; width=&#34;1000&#34; height=&#34;700&#34;&gt;&lt;/svg&gt;
+&lt;em&gt;(You can click-and-drag the nodes around. The name of celebrities should emerge when hovering over the circles. Different groups are distinguished by different color. The radius of circles stand for their number of connections.)&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;For TV show stars, there are a few densely connected groups:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Game of Throne&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Emilia Clarke&lt;/li&gt;
+&lt;li&gt;Nikolaj Coster-Waldau&lt;/li&gt;
+&lt;li&gt;Peter Dinklage&lt;/li&gt;
+&lt;li&gt;Lena Headey&lt;/li&gt;
+&lt;li&gt;Kit Harington&lt;/li&gt;
+&lt;li&gt;Aidan Gillen&lt;/li&gt;
+&lt;li&gt;Rose Leslie&lt;/li&gt;
+&lt;li&gt;Sophie Turner&lt;/li&gt;
+&lt;li&gt;Natalie Dormer&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Vikings&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Katheryn Winnick&lt;/li&gt;
+&lt;li&gt;Travis Fimmel&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Riverdale&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cole Sprouse&lt;/li&gt;
+&lt;li&gt;Mädchen Amick&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Big Little Lies&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Shailene Woodley&lt;/li&gt;
+&lt;li&gt;Reese Witherspoon&lt;/li&gt;
+&lt;li&gt;Shailene Woodley&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Guardians of the Galaxy&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Chris Pratt&lt;/li&gt;
+&lt;li&gt;Zoe Saldana&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Movie stars&amp;rsquo;relationship network:&lt;/strong&gt;
+&lt;svg id=&#39;movie&#39; width=&#34;1000&#34; height=&#34;700&#34;&gt;&lt;/svg&gt;&lt;/p&gt;
+&lt;p&gt;For movie stars, they are more likely to collaborate with varous of people.&lt;/p&gt;
+&lt;h1 id=&#34;centers-among-stars&#34;&gt;Centers Among Stars&lt;/h1&gt;
+&lt;p&gt;In this section, I am going to compare the &amp;ldquo;degree&amp;rdquo; of top celebrities.&lt;/p&gt;
+&lt;h1 id=&#34;reference&#34;&gt;Reference&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;inspired by &lt;a href=&#34;https://zhuanlan.zhihu.com/p/27369379&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;别开枪，我不是狗仔——数据剖析明星关系&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;script src=&#34;{{ relative }}misc/IMDb_celebrities/d3.ts/bundle.js&#34;&gt;&lt;/script&gt;
+&lt;script&gt;
+  bundle.draw(&#39;movie&#39;, &#39;movie&#39;, &#34;{{ relative }}misc/IMDb_celebrities/output/graph_200.json&#34;);
+  bundle.draw(&#39;tv&#39;, &#39;tvEps&#39;, &#34;{{ relative }}misc/IMDb_celebrities/output/graph_200.json&#34;);
+  &lt;!-- bundle.draw(&#39;all&#39;, &#39;all&#39;, &#34;{{ relative }}misc/IMDb_celebrities/output/graph_200.json&#34;); --&gt;
+&lt;/script&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
