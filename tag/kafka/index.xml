@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kafka | Yuhui Lin&#39;s Website</title>
+    <link>https://yuhui-lin.github.io/tag/kafka/</link>
+      <atom:link href="https://yuhui-lin.github.io/tag/kafka/index.xml" rel="self" type="application/rss+xml" />
+    <description>Kafka</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 01 Jun 2021 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://yuhui-lin.github.io/media/icon_hue500084c77aac037bf395ff3ad15202a_115779_512x512_fill_lanczos_center_3.png</url>
+      <title>Kafka</title>
+      <link>https://yuhui-lin.github.io/tag/kafka/</link>
+    </image>
+    
+    <item>
+      <title>Injecting JSON-formatted data into Clickhouse via Kafka Engine</title>
+      <link>https://yuhui-lin.github.io/post/2021-06-01_clickhouse-json/</link>
+      <pubDate>Tue, 01 Jun 2021 00:00:00 +0000</pubDate>
+      <guid>https://yuhui-lin.github.io/post/2021-06-01_clickhouse-json/</guid>
+      <description>&lt;h1 id=&#34;overview&#34;&gt;Overview&lt;/h1&gt;
+&lt;p&gt;ClickHouse can read messages directly from a Kafka topic using the Kafka table engine coupled with a materialized view that fetches messages and pushes them to a ClickHouse target table. Here we provide some examples of reading JSON formatted data from Kafka to Clickhouse mergeTree table.&lt;/p&gt;
+&lt;h2 id=&#34;creat-kafka-topic&#34;&gt;Creat Kafka topic&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;kafka-topics --bootstrap-server kafka-broker-1.default.svc.cluster.local:9092 \
+--topic clickhouseTestJson --create --partitions 6 --replication-factor 2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;mergetree-table&#34;&gt;MergeTree Table&lt;/h2&gt;
+&lt;p&gt;Here we define a mergeTree table which will be used to store injected data.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;CREATE TABLE IF NOT EXISTS event
+(
+    date Date DEFAULT toDate(timestamp, &#39;UTC&#39;) Codec(ZSTD),
+    id Int64 Codec(Gorilla, LZ4),
+    timestamp_1min UInt64 DEFAULT (floor(timestamp/60) * 60) Codec(DoubleDelta, LZ4),
+    message LowCardinality(String),
+    timestamp UInt64 Codec(DoubleDelta, LZ4),
+    measure_int UInt64 Codec(Gorilla, LZ4),
+    measure_float Float64 Codec(Gorilla, LZ4),
+    measure_string String Codec(ZSTD)
+
+)
+ENGINE = ReplicatedMergeTree(
+    &#39;/clickhouse/tables/{shard}/default/customer&#39;,
+    &#39;{replica}&#39;
+)
+PARTITION BY toStartOfMonth(date)
+ORDER BY (
+    id,
+    timestamp_1min
+)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;kafka-engine-with-jsoneachrow&#34;&gt;Kafka engine with JSONEachRow&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+  &amp;quot;id&amp;quot;: &amp;quot;123&amp;quot;,
+  &amp;quot;message&amp;quot;: &amp;quot;test&amp;quot;,
+  &amp;quot;timestamp&amp;quot;: 1234567,
+  &amp;quot;measure_int&amp;quot;: 987
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If the input data looks like above, we can define a Kafka Engine table with &lt;code&gt;JSONEachRow&lt;/code&gt; format.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;CREATE TABLE IF NOT EXISTS json_queue1 (
+    id Int64,
+    message LowCardinality(String),
+    timestamp UInt64,
+    measure_int UInt64,
+    measure_float Float64,
+    measure_string String
+) ENGINE = Kafka
+SETTINGS kafka_broker_list = &#39;kafka-broker-1.default.svc.cluster.local:9092&#39;,
+       kafka_topic_list = &#39;clickhouseTestJson&#39;,
+       kafka_group_name = &#39;clickhouseTestJsonGroup1&#39;,
+       kafka_format = &#39;JSONEachRow&#39;,
+       kafka_skip_broken_messages = 10000,
+       kafka_max_block_size = 1048576;
+
+-- materialized view to automatically move data from Kafka to target table.
+CREATE MATERIALIZED VIEW json_mv1 TO event AS
+SELECT id, timestamp, message, measure_int, measure_float, measure_string
+FROM json_queue1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;kafka-engine-with-jsonasstring&#34;&gt;Kafka engine with JSONAsString&lt;/h2&gt;
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+  &amp;quot;id&amp;quot;: &amp;quot;123&amp;quot;,
+  &amp;quot;timestamp&amp;quot;: 1234567,
+  &amp;quot;payload&amp;quot; : {
+    &amp;quot;message&amp;quot;: &amp;quot;test&amp;quot;,
+    &amp;quot;measure_string&amp;quot;: &amp;quot;haha&amp;quot;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If the input data has nested object, we can use &lt;code&gt;JSONAsString&lt;/code&gt; format. The JSON object will be parsed and extracted in the materialized view.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sql&#34;&gt;CREATE TABLE IF NOT EXISTS json_queue2 (
+  all String
+) ENGINE = Kafka
+SETTINGS kafka_broker_list = &#39;kafka-broker-1.default.svc.cluster.local:9092&#39;,
+       kafka_topic_list = &#39;clickhouseTestJson&#39;,
+       kafka_group_name = &#39;clickhouseTestJsonGroup2&#39;,
+       kafka_format = &#39;JSONAsString&#39;,
+       kafka_skip_broken_messages = 10000,
+       kafka_max_block_size = 1048576;
+
+
+-- materialized view to automatically move data from Kafka to target table.
+-- Find more ways to extrac values from JSON: https://clickhouse.com/docs/en/sql-reference/functions/json-functions/
+CREATE MATERIALIZED VIEW json_mv2 TO event AS
+SELECT 
+    JSONExtract(all, &#39;id&#39;, &#39;Int64&#39;) AS id, 
+    JSONExtract(all, &#39;timestamp&#39;, &#39;Int64&#39;) AS timestamp, 
+    JSONExtractString(all, &#39;payload&#39;, &#39;message&#39;) AS message, 
+    JSONExtractString(all, &#39;payload&#39;, &#39;measure_string&#39;) AS measure_string, 
+FROM json_queue2
+
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

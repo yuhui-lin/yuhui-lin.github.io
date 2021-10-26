@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GO Module | Yuhui Lin&#39;s Website</title>
+    <link>https://yuhui-lin.github.io/tag/go-module/</link>
+      <atom:link href="https://yuhui-lin.github.io/tag/go-module/index.xml" rel="self" type="application/rss+xml" />
+    <description>GO Module</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 20 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://yuhui-lin.github.io/media/icon_hue500084c77aac037bf395ff3ad15202a_115779_512x512_fill_lanczos_center_3.png</url>
+      <title>GO Module</title>
+      <link>https://yuhui-lin.github.io/tag/go-module/</link>
+    </image>
+    
+    <item>
+      <title>Downloading private repo under Gitlab subgroup using GO Module</title>
+      <link>https://yuhui-lin.github.io/post/2020-04-20_golang-gitlab-subgroup/</link>
+      <pubDate>Mon, 20 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>https://yuhui-lin.github.io/post/2020-04-20_golang-gitlab-subgroup/</guid>
+      <description>&lt;p&gt;To download a private repository hosted in Gitlab/Github with GO Module, we can change the url to add git user and access token:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;git config --global url.&amp;quot;https://${GIT_USER}:${GIT_TOKEN}@gitlab.com/&amp;quot;.insteadOf &amp;quot;https://gitlab.com/&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In Gitlab CI/CD, it should be &lt;code&gt;https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;However, if the private respository is under a Gitlab subgroup, eg, &lt;code&gt;gitlab.com/company/groupName/repository&lt;/code&gt;, the above approach doesn&amp;rsquo;t work. The following approach with netrc will fix it:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;printf &amp;quot;machine gitlab.com\n\
+    login ${GIT_USER}\n\
+    password ${GIT_TOKEN}\n&amp;quot;\
+    &amp;gt;&amp;gt; /root/.netrc
+go env -w GOPRIVATE=gitlab.com/company
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
